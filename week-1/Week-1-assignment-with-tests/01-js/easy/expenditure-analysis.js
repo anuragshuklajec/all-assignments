@@ -9,7 +9,48 @@
 */
 
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  let result = {}
+  for (var i = 0; i < transactions.length ; i++){
+     var transaction = transactions[i]
+     var category = transaction['category']
+     var price = transaction['price']
+     console.log(price);
+     result[category] = result[category] ?? 0 ;
+     result[category] += price ;
+     
+  }
+
+  return result;
 }
+
+var Transactions = [
+  {
+    itemName : "Shampoo",
+    category : "Washroom",
+    price : 150,
+
+  },
+  {
+    itemName : "Soap",
+    category : "Washroom",
+    price : 50,
+
+  },
+  {
+    itemName : "Wheat Flour",
+    category : "Kitchen",
+    price : 350,
+
+  },
+  {
+    itemName : "Bread",
+    category : "Kitchen",
+    price : 50,
+
+  }
+]
+
+console.log(calculateTotalSpentByCategory(Transactions))
+
 
 module.exports = calculateTotalSpentByCategory;

@@ -8,7 +8,20 @@
 */
 
 function isAnagram(str1, str2) {
+  str1 = str1.toLowerCase()
+  str2 = str2.toLowerCase()
+
+
+  str1 = str1.split('')
+  str2 = str2.split('')
+
+  str1.sort()
+  str2.sort()
+
+  return (str1.join('') == str2.join(''))
 
 }
+
+console.log(isAnagram("ac*","*Ca"))
 
 module.exports = isAnagram;

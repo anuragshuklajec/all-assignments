@@ -41,9 +41,76 @@
  */
 const express = require('express');
 const bodyParser = require('body-parser');
+const PORT = 3000 ; 
 
 const app = express();
 
+var todoList = []
+
 app.use(bodyParser.json());
+
+
+app.post('/todos',(req,res)=>{
+  var body = req.body ; 
+  body["id"] = Date.now() ;
+  todoList.push(body)
+  console.log(todoList);
+  res.status(201).send(`Todo added successfully !!`)
+
+  
+})
+
+app.get('/todos',(req,res)=>{
+  res.status(201).send(todoList)
+
+})
+
+app.get('/todos/:id',(req,res)=>{
+  const idToFind = req.params.id
+  console.log(idToFind);
+  const foundTodo = todoList.find((event)=>{
+    return event["id"] == parseInt(idToFind)
+  })
+  if(foundTodo){
+    res.status(201).send(foundTodo)
+  }else{
+    res.status(401).send("Todo with given ID not found!!")
+  }
+})
+
+app.put('/todos/:id',(req,res)=>{
+  const updatedTodo = req.body
+  const idToFind = req.params.id
+  console.log(idToFind);
+  const foundIndex = todoList.findIndex((event)=>{
+    return event["id"] == parseInt(idToFind)
+  })
+  if(foundIndex != -1){
+    todoList[foundIndex] = {...todoList[foundIndex],...updatedTodo} ;4
+    res.status(201).send(todoList[foundIndex])
+  }else{
+    res.status(401).send("Couldn't find the id given")
+  }
+
+})
+
+app.delete('/todos/:id',(req,res)=>{
+  const idToFind = req.params.id
+  console.log(idToFind);
+  const foundIndex = todoList.findIndex((event)=>{
+    return event["id"] == parseInt(idToFind)
+  })
+  if(foundIndex != -1){
+    todoList.splice(foundIndex, 1);
+    res.status(201).send(`todo deleted succesfully`)
+  }else{
+    res.status(401).send("Couldn't find the id given")
+  }
+
+})
+
+app.listen(PORT,()=>{
+  console.log("Server runnign on port 3000");
+})
 
 module.exports = app;

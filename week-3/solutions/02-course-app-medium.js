@@ -67,7 +67,6 @@ app.post('/admin/courses', authenticateJwt, (req, res) => {
 
 app.put('/admin/courses/:courseId', authenticateJwt, (req, res) => {
   const courseId = parseInt(req.params.courseId);
-
   const courseIndex = COURSES.findIndex(c => c.id === courseId);
 
   if (courseIndex > -1) {

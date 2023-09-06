@@ -10,6 +10,8 @@ function RenderTodo() {
   useEffect(() => {
     fetchTodo();
     setInterval(fetchTodo, 1000);
+
+    
   }, []);
 
   const fetchTodo = () => {

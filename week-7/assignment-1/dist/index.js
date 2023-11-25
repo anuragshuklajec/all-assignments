@@ -10,6 +10,7 @@ const port = 3000;
 const auth_1 = __importDefault(require("./routes/auth"));
 const todo_1 = __importDefault(require("./routes/todo"));
 const cors_1 = __importDefault(require("cors"));
+const db_1 = require("./secrets/db");
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use("/auth", auth_1.default);
@@ -17,4 +18,4 @@ app.use("/todo", todo_1.default);
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
-mongoose_1.default.connect('mongodb+srv://anuragshukla:ItneSWDnNnXff7PR@cluster0.94jxmhp.mongodb.net/');
+mongoose_1.default.connect(db_1.dbuRI);

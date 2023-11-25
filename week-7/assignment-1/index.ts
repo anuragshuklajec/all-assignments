@@ -6,6 +6,8 @@ const port = 3000;
 import authRoutes from "./routes/auth";
 import todoRoutes from "./routes/todo";
 import cors from "cors";
+import { dbuRI } from "./secrets/db";
+
 
 app.use(cors());
 app.use(express.json());
@@ -16,4 +18,5 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
-mongoose.connect('mongodb+srv://anuragshukla:ItneSWDnNnXff7PR@cluster0.94jxmhp.mongodb.net/');
+ 
+mongoose.connect(dbuRI);
